@@ -1,1 +1,198 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quant Society Norge – Data, finans og algoritmisk tenkning</title>
+  <meta name="description" content="Quant Society er et norsk fellesskap for data- og kvantinteresserte: arrangementer, artikler og nettverk på tvers av bransjer." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Quant Society Norge" />
+  <meta property="og:description" content="Fellesskap for data, finans og algoritmisk tenkning." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.quantsociety.no/" />
+  <meta property="og:image" content="/og-image.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Quant Society Norge" />
+  <meta name="twitter:description" content="Fellesskap for data, finans og algoritmisk tenkning." />
+  <meta name="twitter:image" content="/og-image.png" />
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Quant Society Norge",
+    "url": "https://www.quantsociety.no/",
+    "logo": "https://www.quantsociety.no/og-image.png",
+    "email": "hei@quantsociety.no",
+    "sameAs": []
+  }
+  </script>
+  <style>
+    :root{
+      --bg:#0b0c0e; --panel:#111317; --text:#e5e7eb; --muted:#a1a1aa; --brand:#6ee7b7; --link:#93c5fd;
+      --ring: rgba(110,231,183,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#0f1115 50%, var(--panel));color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";}
+    a{color:var(--link);text-decoration:none}
+    a:focus,button:focus,input:focus{outline:2px solid var(--ring);outline-offset:2px}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px}
+    .logo-mark{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 160deg,#0ea5e9,#22d3ee,#34d399);box-shadow:0 10px 30px rgba(52,211,153,.25)}
+    nav ul{display:flex;gap:18px;list-style:none;padding:0;margin:0}
+    nav a{color:var(--text);opacity:.85}
+    nav a:hover{opacity:1}
+    .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;padding:56px 0}
+    .hero h1{font-size:clamp(32px,4vw,56px);line-height:1.05;margin:0}
+    .hero p{font-size:clamp(16px,2vw,20px);color:var(--muted)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{border:0;border-radius:14px;padding:12px 16px;background:#0ea5e9;color:#001016;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(14,165,233,.25)}
+    .btn.secondary{background:#1f2937;color:#e5e7eb}
+    .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);backdrop-filter: blur(4px);border-radius:18px;padding:20px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .section{padding:32px 0}
+    .kicker{color:var(--brand);font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:12px}
+    .muted{color:var(--muted)}
+    footer{padding:32px 0;color:#a1a1aa;border-top:1px solid rgba(255,255,255,.06);margin-top:48px}
+    .newsletter{display:flex;gap:10px;margin-top:12px}
+    input[type=email]{flex:1;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0f1217;color:var(--text);padding:12px 14px}
+    .notice{font-size:12px;color:#9ca3af;margin-top:8px}
+    .mobile-toggle{display:none}
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav ul{display:none}
+      .mobile-toggle{display:block;background:#1f2937;color:#e5e7eb;padding:8px 12px;border-radius:10px;border:0}
+      nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;top:64px;right:24px;background:#0f1217;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;min-width:200px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo" aria-label="Quant Society Norge">
+        <div class="logo-mark" aria-hidden="true"></div>
+        <span>Quant Society Norge</span>
+      </div>
+      <nav id="nav">
+        <button class="mobile-toggle" aria-controls="nav" aria-expanded="false" onclick="toggleNav(this)">Meny</button>
+        <ul>
+          <li><a href="#om">Om</a></li>
+          <li><a href="#arr">Arrangementer</a></li>
+          <li><a href="#artikler">Artikler</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="kicker">Norsk fagfelleskap</p>
+          <h1>Data, finans og algoritmisk tenkning – i ett miljø</h1>
+          <p>Quant Society samler folk som bygger med data: kvantitative analytikere, ingeniører, forskere, studenter og nysgjerrige. Vi møtes, lærer, deler kode og lager ting sammen.</p>
+          <div class="cta">
+            <a class="btn" href="#nyhetsbrev">Meld deg på nyhetsbrev</a>
+            <a class="btn secondary" href="#arr">Se neste meetup</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Neste hendelse</h3>
+          <p class="muted" style="margin-top:8px">Dato og sted kommer. Vil du bidra med foredrag eller lokale?</p>
+          <a class="btn" href="mailto:hei@quantsociety.no?subject=Foredrag%20eller%20lokaler">Jeg kan bidra</a>
+        </div>
+      </section>
+
+      <section id="om" class="section">
+        <div class="grid">
+          <div class="card">
+            <h3>Hva vi gjør</h3>
+            <p>Meetups, workshopper og åpne prosjekter. Temaer spenner fra backtesting og porteføljeteori til MLOps, datavisualisering og Bayesiansk inferens.</p>
+          </div>
+          <div class="card">
+            <h3>For hvem</h3>
+            <p>For deg som liker tall, kode og konkrete resultater – uansett om du jobber i finans, energi, konsulentbransjen eller akademia.</p>
+          </div>
+          <div class="card">
+            <h3>Bli med</h3>
+            <p>Bli med i nyhetsbrevet for invitasjoner og oppsummeringer. Medlemskap er gratis.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="arr" class="section">
+        <h2>Arrangementer</h2>
+        <div class="card">
+          <p class="muted">Kalenderen publiseres snart. Har du forslag til temaer, send en e‑post.</p>
+        </div>
+      </section>
+
+      <section id="artikler" class="section">
+        <h2>Artikler & ressurser</h2>
+        <div class="grid">
+          <article class="card">
+            <h4 style="margin-top:0">Startpakke: Backtesting i Python</h4>
+            <p class="muted">Notebook og sjekkliste for å komme i gang med datahåndtering, faktor‑testing og resultatevaluering.</p>
+            <a href="#" aria-disabled="true">Kommer snart</a>
+          </article>
+          <article class="card">
+            <h4 style="margin-top:0">Guide: Dataviz for kvant</h4>
+            <p class="muted">Beste praksis for å gjøre komplekse resultater forståelige.</p>
+            <a href="#" aria-disabled="true">Kommer snart</a>
+          </article>
+          <article class="card">
+            <h4 style="margin-top:0">Åpne datasett</h4>
+            <p class="muted">Lenkesamling til norske og internasjonale datasett relevante for kvantprosjekter.</p>
+            <a href="#" aria-disabled="true">Kommer snart</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="nyhetsbrev" class="section card">
+        <h2>Nyhetsbrev</h2>
+        <p>Få invitasjoner og sammendrag rett i innboksen. Ingen spam.</p>
+        <form class="newsletter" action="https://formspree.io/f/ERSTATT_MED_DIN_ID" method="POST" onsubmit="return newsletterSubmit(event)">
+          <label class="sr-only" for="email">E-post</label>
+          <input id="email" name="email" type="email" placeholder="din@epost.no" required />
+          <button class="btn" type="submit">Meld meg på</button>
+        </form>
+        <p id="newsletter-msg" class="notice" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="kontakt" class="section">
+        <h2>Kontakt</h2>
+        <div class="card">
+          <p>E‑post: <a href="mailto:hei@quantsociety.no">hei@quantsociety.no</a></p>
+          <p class="muted">Du kan også finne oss på GitHub/LinkedIn når de er klare.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>© <span id="year"></span> Quant Society Norge · Org/forening (kommer) · <a href="#">Personvern</a></small>
+    </footer>
+  </div>
+
+  <script>
+    function toggleNav(btn){
+      const nav = document.getElementById('nav');
+      const open = !nav.classList.contains('open');
+      nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function newsletterSubmit(e){
+      e.preventDefault();
+      const msg = document.getElementById('newsletter-msg');
+      msg.textContent = 'Takk! Du får en bekreftelse på e-post (om dette var en ekte formularkobling).';
+      return false;
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
