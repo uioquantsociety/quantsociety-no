@@ -32,7 +32,6 @@
     }
     a{color:var(--primary)}
     img{max-width:100%; height:auto;}
-    /* Gjør mørk/transparent logo lys på mørk bakgrunn */
     .logo-on-dark{filter:brightness(0) invert(1) contrast(1.05) saturate(1.1);} 
     
     /* Header / Nav */
@@ -70,17 +69,48 @@
     .card h3{margin-top:0}
     .muted{color:var(--muted)}
 
+    /* --- Forventninger: profesjonell, nøytral stil --- */
+    .card.expect{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid rgba(148,163,184,.22); /* nøytral kant */
+    }
+    .expect .features{display:grid; gap:12px}
+    .expect .feat{
+      display:flex; gap:.8rem; align-items:flex-start;
+      padding:12px; border-radius:12px;
+      background: rgba(255,255,255,.02);
+      border:1px solid rgba(148,163,184,.18); /* diskret linje */
+    }
+    .expect .feat-icon{
+      flex:0 0 auto; display:grid; place-items:center;
+      width:32px; height:32px; border-radius:8px;
+      background: rgba(148,163,184,.12);
+      border:1px solid rgba(148,163,184,.30);
+    }
+    .expect .feat-icon svg{width:18px; height:18px; color:#cbd5e1}
+    .expect .feat h4{margin:.1rem 0 .15rem; font-size:1.02rem}
+    .expect .feat p{margin:0; color:var(--muted)}
+
+    /* --- Mer dynamiske aktivitetskort --- */
+    #aktiviteter .card{position:relative; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+    #aktiviteter .card:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.45)}
+    #aktiviteter .card::before{content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--accent, rgba(96,165,250,.6)), transparent)}
+    #aktiviteter .card::after{content:""; position:absolute; right:-20%; top:-20%; width:70%; height:70%; background:radial-gradient(220px 160px at 70% 30%, var(--accent, rgba(96,165,250,.45)), transparent 60%); opacity:.6; pointer-events:none}
+    #aktiviteter .card:nth-child(1){--accent:rgba(96,165,250,.65); border-color:rgba(96,165,250,.35)}
+    #aktiviteter .card:nth-child(2){--accent:rgba(139,92,246,.65); border-color:rgba(139,92,246,.35)}
+    #aktiviteter .card:nth-child(3){--accent:rgba(245,158,11,.65); border-color:rgba(245,158,11,.35)}
+
     /* Next Event */
     .event-card .meta{display:flex; flex-wrap:wrap; gap:.6rem; margin:.6rem 0 1rem}
     .chip{display:inline-flex; align-items:center; gap:.4rem; background:rgba(96,165,250,.15); border:1px solid rgba(96,165,250,.35); padding:.35rem .6rem; border-radius:999px; font-size:.9rem}
     .chip svg{width:16px; height:16px}
-    .admin{margin-top:12px}
-    .admin form{display:grid; gap:.6rem; grid-template-columns: repeat(2, minmax(0,1fr));}
-    .admin form textarea{grid-column:1/-1}
-    .admin input, .admin textarea{background:rgba(255,255,255,.04); color:var(--text); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:.6rem .7rem}
-    .admin .list{margin-top:10px}
     .event-empty{color:var(--muted); font-style:italic}
-    .event-actions{display:flex; gap:.6rem; margin-top:.6rem}
+    .events-list{display:grid; gap:16px}
+    .event-card.past{opacity:.75;}
+    /* Mer luft under "Legg i kalender"-knappen */
+    .event-card { padding-bottom: 28px; }   /* øk til 32px om du vil ha mer */
+    .event-card .event-actions { margin-top: 12px; }
+
 
     /* Gallery */
     .gallery{display:grid; grid-template-columns:1fr; gap:16px}
@@ -112,7 +142,6 @@
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Gå til toppen">
-        <!-- Legg logo-filen i samme mappe og sørg for navnet under -->
         <img class="logo-on-dark" src="assets/UIO-Quant-Society-Logo.png" alt="UIO Quant Society logo" loading="lazy">
         <span>UIO Quant Society</span>
       </a>
@@ -153,15 +182,55 @@
         <p>UIO Quant Society samler studenter med interesse for matematikk, informatikk, økonomi og statistikk – kort sagt <em>kvant</em>. Vi bygger ferdigheter som brukes i finansbransjen: dataanalyse, modellering, optimalisering og risikostyring. Samtidig skaper vi et sosialt miljø der det er lav terskel for å lære og dele.</p>
         <p>Slagordet vårt er <strong>«en bro mellom skolebenken og arbeidslivet»</strong>. Hos oss får du praktisk erfaring ved å lage og teste strategier, arbeide i team og presentere resultater – akkurat slik det ofte gjøres i industrien.</p>
       </div>
-      <div class="card reveal">
+
+      <!-- Oppdatert forventningsbolk -->
+      <div class="card reveal expect">
         <h3>Hva kan du forvente?</h3>
-        <ul>
-          <li>Workshops i <strong>algoritmisk trading</strong> og porteføljeteori.</li>
-          <li>Kvelder der vi <strong>løser intervjuspørsmål</strong> og <strong>case</strong> innen kvantitativ finans.</li>
-          <li>Datasett, kodeeksempler og prosjekter du kan bygge CV av.</li>
-          <li>Et inkluderende nettverk og sosiale sammenkomster.</li>
-        </ul>
+        <div class="features" role="list">
+          <div class="feat" role="listitem">
+            <div class="feat-icon" aria-hidden="true">
+              <!-- Læring (check) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Læring</h4>
+              <p>Praktiske workshops, foredrag og prosjektoppgaver innen kvant, dataanalyse og programmering.</p>
+            </div>
+          </div>
+
+          <div class="feat" role="listitem">
+            <div class="feat-icon" aria-hidden="true">
+              <!-- Faglig fellesskap (stabler/lag) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20l9-5-9-5-9 5 9 5z"/>
+                <path d="M12 12l9-5-9-5-9 5 9 5z"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Faglig fellesskap</h4>
+              <p>Sparring og diskusjoner på tvers av fag. Del erfaringer, bygg kompetanse og lær av hverandre.</p>
+            </div>
+          </div>
+
+          <div class="feat" role="listitem">
+            <div class="feat-icon" aria-hidden="true">
+              <!-- Karriere- og bransjekontakt (koffert) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 7V6a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v1"/>
+                <rect x="3" y="7" width="18" height="13" rx="2"/>
+                <path d="M3 12h18"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Karriere- og bransjekontakt</h4>
+              <p>Bedriftsmøter, case-kvelder og konkrete tips til CV/intervju – kobling mot relevante arbeidsgivere.</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- slutt forventningsbolk -->
     </div>
   </section>
 
@@ -187,13 +256,10 @@
 
   <section id="event">
     <div class="container">
-      <h2 class="reveal">Neste event</h2>
-      <div id="nextEvent" class="card event-card reveal" aria-live="polite">
-        <p class="event-empty">Laster kommende event…</p>
+      <h2 class="reveal">Kommende events</h2>
+      <div id="eventsWrap" class="events-list reveal" aria-live="polite">
+        <p class="event-empty">Laster events…</p>
       </div>
-
-      <!-- Adminpanel for enkel innlegging av events. Data lagres i localStorage i nettleseren. -->
-      <!-- Adminpanel er flyttet til en egen fil: admin.html -->
     </div>
   </section>
 
@@ -201,7 +267,6 @@
     <div class="container">
       <h2 class="reveal">Gjengen vår</h2>
       <div class="gallery reveal">
-        <!-- Legg bildefilen i samme mappe og sørg for navnet under -->
         <img src="assets/IMG_1812.jpeg" alt="UIO Quant Society – gruppebilde" loading="lazy" id="groupPhoto"/>
       </div>
       <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Forstørret bilde">
@@ -210,24 +275,25 @@
     </div>
   </section>
 
+  <section id="sosiale">
+    <div class="container">
+      <h2 class="reveal">Sosiale medier</h2>
+      <p class="muted reveal">Følg oss for oppdateringer om events og prosjekter.</p>
+      <div class="cta reveal">
+        <a class="btn btn-primary" href="https://www.instagram.com/uioquantsociety/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/company/uio-quant-society" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <!-- LinkedIn embed fjernet -->
+    </div>
+  </section>
+
   <section id="kontakt">
-    <div class="container grid cols-2">
-      <div class="reveal">
-        <h2>Kontakt oss</h2>
-        <p>Har du lyst til å bli med, eller er du en bedrift som ønsker samarbeid? Send oss en e‑post – vi svarer fortløpende.</p>
-        <p>
-          <a class="btn btn-primary" href="mailto:kontakt@quantsociety.no">kontakt@quantsociety.no</a>
-        </p>
-      </div>
-      <div class="card reveal">
-        <h3>Lenker</h3>
-        <ul>
-          <li><a href="#om-oss">Om oss</a></li>
-          <li><a href="#aktiviteter">Aktiviteter</a></li>
-          <li><a href="#event">Neste event</a></li>
-          <li><a href="#galleri">Gjengen</a></li>
-        </ul>
-      </div>
+    <div class="container">
+      <h2>Kontakt oss</h2>
+      <p>Har du lyst til å bli med, eller er du en bedrift som ønsker samarbeid? Send oss en e-post – vi svarer fortløpende.</p>
+      <p>
+        <a class="btn btn-primary" href="mailto:kontakt@quantsociety.no">kontakt@quantsociety.no</a>
+      </p>
     </div>
   </section>
 
@@ -286,9 +352,9 @@
     $('#year').textContent = new Date().getFullYear();
 
     // --- Eventhåndtering (offentlig) ---
-    // Nettsiden henter events fra assets/events.json og viser neste kommende event.
-
     function toDate(e){ return new Date(`${e.date}T${e.time}:00`); }
+    function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m])); }
 
     async function fetchPublicEvents(){
       try{
@@ -299,47 +365,55 @@
       }catch{ return []; }
     }
 
-    async function renderNextEvent(){
-      const wrap = document.getElementById('nextEvent');
-      const events = (await fetchPublicEvents()).sort((a,b)=> toDate(a)-toDate(b));
-      const now = new Date();
-      const upcoming = events.find(e => toDate(e) >= now);
-      if(!upcoming){
-        wrap.innerHTML = '<p class="event-empty">Ingen kommende events enda – følg med her og på e‑post!</p>';
-        return;
-      }
-      const d = toDate(upcoming);
-      const dateStr = d.toLocaleString(undefined, { dateStyle:'full', timeStyle:'short' });
-      wrap.innerHTML = `
-        <h3>${escapeHtml(upcoming.title)}</h3>
-        <div class="meta">
-          <span class="chip" title="Dato og tid">${iconClock()} ${dateStr}</span>
-          <span class="chip" title="Sted">${iconPin()} ${escapeHtml(upcoming.place)}</span>
-        </div>
-        ${upcoming.description ? `<p>${escapeHtml(upcoming.description)}</p>` : ''}
-        <div class="event-actions">
-          <a class="btn btn-primary" href="${makeICS(upcoming)}" download="${slug(upcoming.title)}.ics">Legg i kalender</a>
-          <a class="btn btn-outline" href="#kontakt">Spørsmål? Kontakt oss</a>
-        </div>`;
-    }
-
-    function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m])); }
-
     function makeICS(e){
       const start = toDate(e);
       const end = new Date(start.getTime() + 1000*60*90);
       const dt = (d)=> d.toISOString().slice(0,19).replace(/[-:]/g,'') + 'Z';
-      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//UIO Quant Society//NO\nBEGIN:VEVENT\nUID:${crypto.randomUUID()}\nDTSTAMP:${dt(new Date())}\nDTSTART:${dt(start)}\nDTEND:${dt(end)}\nSUMMARY:${e.title}\nLOCATION:${e.place}\nDESCRIPTION:${e.description||''}\nEND:VEVENT\nEND:VCALENDAR`;
+      const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//UIO Quant Society//NO
+BEGIN:VEVENT
+UID:${crypto.randomUUID()}
+DTSTAMP:${dt(new Date())}
+DTSTART:${dt(start)}
+DTEND:${dt(end)}
+SUMMARY:${e.title}
+LOCATION:${e.place}
+DESCRIPTION:${e.description||''}
+END:VEVENT
+END:VCALENDAR`;
       return 'data:text/calendar;charset=utf8,' + encodeURIComponent(ics);
     }
 
+    async function renderEvents(){
+      const wrap = document.getElementById('eventsWrap');
+      const events = (await fetchPublicEvents()).sort((a,b)=> toDate(a) - toDate(b));
+      if(!events.length){ wrap.innerHTML = '<p class="event-empty">Ingen events publisert enda.</p>'; return; }
+      const now = new Date();
+      wrap.innerHTML = events.map(e => {
+        const d = toDate(e);
+        const dateStr = d.toLocaleString(undefined, {dateStyle:'full', timeStyle:'short'});
+        const past = d < now;
+        return `
+          <article class="card event-card ${past ? 'past' : ''}">
+            <h3>${escapeHtml(e.title)}</h3>
+            <div class="meta">
+              <span class="chip" title="Dato og tid">${iconClock()} ${dateStr}</span>
+              <span class="chip" title="Sted">${iconPin()} ${escapeHtml(e.place)}</span>
+              ${past ? '<span class="chip" title="Avsluttet">Ferdig</span>' : ''}
+            </div>
+            ${e.description ? `<p>${escapeHtml(e.description)}</p>` : ''}
+            <div class="event-actions">
+              <a class="btn btn-primary" href="${makeICS(e)}" download="${slug(e.title)}.ics">Legg i kalender</a>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
     // Første last
-    renderNextEvent();
+    renderEvents();
 
     // Ikoner (små inline SVG-er)
-    function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
-    function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
     function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
     function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
   </script>
