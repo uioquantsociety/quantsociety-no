@@ -1,198 +1,347 @@
 <!doctype html>
-<html lang="nb">
+<html lang="no">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quant Society Norge – Data, finans og algoritmisk tenkning</title>
-  <meta name="description" content="Quant Society er et norsk fellesskap for data- og kvantinteresserte: arrangementer, artikler og nettverk på tvers av bransjer." />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="/favicon.ico" />
-  <!-- Open Graph -->
-  <meta property="og:title" content="Quant Society Norge" />
-  <meta property="og:description" content="Fellesskap for data, finans og algoritmisk tenkning." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.quantsociety.no/" />
-  <meta property="og:image" content="/og-image.png" />
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Quant Society Norge" />
-  <meta name="twitter:description" content="Fellesskap for data, finans og algoritmisk tenkning." />
-  <meta name="twitter:image" content="/og-image.png" />
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Quant Society Norge",
-    "url": "https://www.quantsociety.no/",
-    "logo": "https://www.quantsociety.no/og-image.png",
-    "email": "hei@quantsociety.no",
-    "sameAs": []
-  }
-  </script>
+  <title>UIO Quant Society</title>
+  <meta name="description" content="UIO Quant Society – en bro mellom skolebenken og arbeidslivet. Forening ved UiO for kvantitativ finans, algoritmisk trading og faglige/sosiale kvelder." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0c0e; --panel:#111317; --text:#e5e7eb; --muted:#a1a1aa; --brand:#6ee7b7; --link:#93c5fd;
-      --ring: rgba(110,231,183,.35);
+      --bg: #0b1220;          /* dyp bakgrunn */
+      --surface: #0f1a2e;     /* kort-bakgrunn */
+      --surface-2: #101a2b;   
+      --primary: #60a5fa;     /* blå aksent */
+      --primary-strong:#3b82f6;
+      --text: #e5e7eb;        /* lys skrift */
+      --muted:#98a2b3;        
+      --success:#22c55e;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,var(--bg),#0f1115 50%, var(--panel));color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";}
-    a{color:var(--link);text-decoration:none}
-    a:focus,button:focus,input:focus{outline:2px solid var(--ring);outline-offset:2px}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-    .logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px}
-    .logo-mark{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 160deg,#0ea5e9,#22d3ee,#34d399);box-shadow:0 10px 30px rgba(52,211,153,.25)}
-    nav ul{display:flex;gap:18px;list-style:none;padding:0;margin:0}
-    nav a{color:var(--text);opacity:.85}
-    nav a:hover{opacity:1}
-    .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;padding:56px 0}
-    .hero h1{font-size:clamp(32px,4vw,56px);line-height:1.05;margin:0}
-    .hero p{font-size:clamp(16px,2vw,20px);color:var(--muted)}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{border:0;border-radius:14px;padding:12px 16px;background:#0ea5e9;color:#001016;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(14,165,233,.25)}
-    .btn.secondary{background:#1f2937;color:#e5e7eb}
-    .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);backdrop-filter: blur(4px);border-radius:18px;padding:20px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .section{padding:32px 0}
-    .kicker{color:var(--brand);font-weight:700;letter-spacing:.15em;text-transform:uppercase;font-size:12px}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.15), transparent),
+                        radial-gradient(1200px 800px at 90% 10%, rgba(2,132,199,.15), transparent),
+                        var(--bg);
+    }
+    a{color:var(--primary)}
+    img{max-width:100%; height:auto;}
+    /* Gjør mørk/transparent logo lys på mørk bakgrunn */
+    .logo-on-dark{filter:brightness(0) invert(1) contrast(1.05) saturate(1.1);} 
+    
+    /* Header / Nav */
+    header{position:sticky; top:0; z-index:1000; backdrop-filter:saturate(160%) blur(10px); background:rgba(5,10,20,.6); border-bottom:1px solid rgba(255,255,255,.06)}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:.75rem; text-decoration:none}
+    .brand img{width:40px; height:40px; border-radius:8px}
+    .brand span{font-weight:800; letter-spacing:.3px}
+    nav ul{display:flex; gap:1rem; list-style:none; margin:0; padding:0}
+    nav a{display:inline-block; padding:.5rem .75rem; border-radius:999px; color:var(--text); text-decoration:none; font-weight:600; opacity:.9}
+    nav a:hover{background:rgba(255,255,255,.06)}
+    nav a.active{background:linear-gradient(90deg, var(--primary-strong), var(--primary)); color:#0b1220}
+    .menu-toggle{display:none; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:.35rem .6rem}
+
+    /* Hero */
+    .hero{padding:84px 0 40px; position:relative}
+    .hero-inner{display:grid; grid-template-columns: 1.2fr .8fr; gap:32px; align-items:center}
+    .hero h1{font-size: clamp(32px, 4.2vw, 56px); line-height:1.08; margin:0 0 .6rem; letter-spacing:.2px}
+    .tagline{font-size: clamp(16px, 2.2vw, 20px); color:var(--muted); margin-bottom:1.25rem}
+    .cta{display:flex; gap:.75rem; flex-wrap:wrap}
+    .btn{appearance:none; border:none; font-weight:700; padding:.9rem 1.1rem; border-radius:12px; cursor:pointer; text-decoration:none}
+    .btn-primary{background:linear-gradient(90deg, var(--primary-strong), var(--primary)); color:#0b1220; box-shadow:var(--shadow)}
+    .btn-outline{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18)}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); padding:18px; border-radius:var(--radius); box-shadow:var(--shadow)}
+
+    /* Sections */
+    section{padding:70px 0}
+    h2{font-size: clamp(26px, 3.2vw, 38px); margin:0 0 16px}
+    p{line-height:1.65}
+    .grid{display:grid; gap:18px}
+    .cols-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .cols-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); padding:20px; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card h3{margin-top:0}
     .muted{color:var(--muted)}
-    footer{padding:32px 0;color:#a1a1aa;border-top:1px solid rgba(255,255,255,.06);margin-top:48px}
-    .newsletter{display:flex;gap:10px;margin-top:12px}
-    input[type=email]{flex:1;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0f1217;color:var(--text);padding:12px 14px}
-    .notice{font-size:12px;color:#9ca3af;margin-top:8px}
-    .mobile-toggle{display:none}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      nav ul{display:none}
-      .mobile-toggle{display:block;background:#1f2937;color:#e5e7eb;padding:8px 12px;border-radius:10px;border:0}
-      nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;top:64px;right:24px;background:#0f1217;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;min-width:200px}
+
+    /* Next Event */
+    .event-card .meta{display:flex; flex-wrap:wrap; gap:.6rem; margin:.6rem 0 1rem}
+    .chip{display:inline-flex; align-items:center; gap:.4rem; background:rgba(96,165,250,.15); border:1px solid rgba(96,165,250,.35); padding:.35rem .6rem; border-radius:999px; font-size:.9rem}
+    .chip svg{width:16px; height:16px}
+    .admin{margin-top:12px}
+    .admin form{display:grid; gap:.6rem; grid-template-columns: repeat(2, minmax(0,1fr));}
+    .admin form textarea{grid-column:1/-1}
+    .admin input, .admin textarea{background:rgba(255,255,255,.04); color:var(--text); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:.6rem .7rem}
+    .admin .list{margin-top:10px}
+    .event-empty{color:var(--muted); font-style:italic}
+    .event-actions{display:flex; gap:.6rem; margin-top:.6rem}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns:1fr; gap:16px}
+    .gallery img{border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); cursor:pointer}
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; place-items:center; z-index:2000}
+    .lightbox img{max-width:92vw; max-height:90vh; border-radius:10px}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.06); padding:36px 0; text-align:center}
+    .foot a{font-weight:700; text-decoration:none}
+
+    /* Utilities */
+    .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero-inner{grid-template-columns:1fr}
+      .cols-2{grid-template-columns:1fr}
+      .cols-3{grid-template-columns:1fr}
+      nav ul{display:none; position:absolute; top:64px; right:10px; background:rgba(5,10,20,.95); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:12px}
+      nav ul.open{display:flex; flex-direction:column}
+      .menu-toggle{display:inline-flex}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo" aria-label="Quant Society Norge">
-        <div class="logo-mark" aria-hidden="true"></div>
-        <span>Quant Society Norge</span>
-      </div>
-      <nav id="nav">
-        <button class="mobile-toggle" aria-controls="nav" aria-expanded="false" onclick="toggleNav(this)">Meny</button>
-        <ul>
-          <li><a href="#om">Om</a></li>
-          <li><a href="#arr">Arrangementer</a></li>
-          <li><a href="#artikler">Artikler</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Gå til toppen">
+        <!-- Legg logo-filen i samme mappe og sørg for navnet under -->
+        <img class="logo-on-dark" src="assets/UIO-Quant-Society-Logo.png" alt="UIO Quant Society logo" loading="lazy">
+        <span>UIO Quant Society</span>
+      </a>
+      <nav aria-label="Hovedmeny">
+        <button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="menuList">Meny</button>
+        <ul id="menuList">
+          <li><a href="#home" class="navlink">Hjem</a></li>
+          <li><a href="#om-oss" class="navlink">Om oss</a></li>
+          <li><a href="#aktiviteter" class="navlink">Aktiviteter</a></li>
+          <li><a href="#event" class="navlink">Neste event</a></li>
+          <li><a href="#galleri" class="navlink">Galleri</a></li>
+          <li><a href="#kontakt" class="navlink">Kontakt</a></li>
         </ul>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero">
-        <div>
-          <p class="kicker">Norsk fagfelleskap</p>
-          <h1>Data, finans og algoritmisk tenkning – i ett miljø</h1>
-          <p>Quant Society samler folk som bygger med data: kvantitative analytikere, ingeniører, forskere, studenter og nysgjerrige. Vi møtes, lærer, deler kode og lager ting sammen.</p>
-          <div class="cta">
-            <a class="btn" href="#nyhetsbrev">Meld deg på nyhetsbrev</a>
-            <a class="btn secondary" href="#arr">Se neste meetup</a>
-          </div>
+  <main id="home" class="hero container">
+    <div class="hero-inner">
+      <div>
+        <h1>En bro mellom skolebenken og arbeidslivet</h1>
+        <p class="tagline">Vi er UIO Quant Society – en studentdrevet forening for deg som er nysgjerrig på kvantitativ finans, algoritmisk trading og datadrevne investeringsstrategier.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#om-oss">Les mer</a>
+          <a class="btn btn-outline" href="mailto:kontakt@quantsociety.no">Bli med / Ta kontakt</a>
         </div>
-        <div class="card">
-          <h3 style="margin-top:0">Neste hendelse</h3>
-          <p class="muted" style="margin-top:8px">Dato og sted kommer. Vil du bidra med foredrag eller lokale?</p>
-          <a class="btn" href="mailto:hei@quantsociety.no?subject=Foredrag%20eller%20lokaler">Jeg kan bidra</a>
-        </div>
-      </section>
+      </div>
+      <div class="hero-card reveal" aria-hidden="true">
+        <img class="logo-on-dark" src="assets/UIO-Quant-Society-Logo.png" alt="UIO Quant Society" style="width:100%; display:block" />
+      </div>
+    </div>
+  </main>
 
-      <section id="om" class="section">
-        <div class="grid">
-          <div class="card">
-            <h3>Hva vi gjør</h3>
-            <p>Meetups, workshopper og åpne prosjekter. Temaer spenner fra backtesting og porteføljeteori til MLOps, datavisualisering og Bayesiansk inferens.</p>
-          </div>
-          <div class="card">
-            <h3>For hvem</h3>
-            <p>For deg som liker tall, kode og konkrete resultater – uansett om du jobber i finans, energi, konsulentbransjen eller akademia.</p>
-          </div>
-          <div class="card">
-            <h3>Bli med</h3>
-            <p>Bli med i nyhetsbrevet for invitasjoner og oppsummeringer. Medlemskap er gratis.</p>
-          </div>
-        </div>
-      </section>
+  <section id="om-oss">
+    <div class="container grid cols-2">
+      <div class="reveal">
+        <h2>Om oss</h2>
+        <p>UIO Quant Society samler studenter med interesse for matematikk, informatikk, økonomi og statistikk – kort sagt <em>kvant</em>. Vi bygger ferdigheter som brukes i finansbransjen: dataanalyse, modellering, optimalisering og risikostyring. Samtidig skaper vi et sosialt miljø der det er lav terskel for å lære og dele.</p>
+        <p>Slagordet vårt er <strong>«en bro mellom skolebenken og arbeidslivet»</strong>. Hos oss får du praktisk erfaring ved å lage og teste strategier, arbeide i team og presentere resultater – akkurat slik det ofte gjøres i industrien.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Hva kan du forvente?</h3>
+        <ul>
+          <li>Workshopser i <strong>algoritmisk trading</strong> og porteføljeteori.</li>
+          <li>Kvelder der vi <strong>løser intervjuspørsmål</strong> og <strong>case</strong> innen kvantitativ finans.</li>
+          <li>Datasett, kodeeksempler og prosjekter du kan bygge CV av.</li>
+          <li>Et inkluderende nettverk og sosiale sammenkomster.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      <section id="arr" class="section">
-        <h2>Arrangementer</h2>
-        <div class="card">
-          <p class="muted">Kalenderen publiseres snart. Har du forslag til temaer, send en e‑post.</p>
-        </div>
-      </section>
+  <section id="aktiviteter">
+    <div class="container">
+      <h2 class="reveal">Aktiviteter</h2>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <h3>Algoritmisk trading</h3>
+          <p>Vi utvikler, backtester og diskuterer handelsstrategier i Python. Fokus på datakvalitet, signaler, risiko og robusthet.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Intervjuforberedelser</h3>
+          <p>Brain teasers, sannsynlighet, statistikk, finansmatte og koding – akkurat slik du møter i kvant-intervjuer.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Sosiale kvelder</h3>
+          <p>Kort foredrag + pizza + diskusjoner. Del erfaringer, få innspill til prosjekter og bli kjent med nye quants.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-      <section id="artikler" class="section">
-        <h2>Artikler & ressurser</h2>
-        <div class="grid">
-          <article class="card">
-            <h4 style="margin-top:0">Startpakke: Backtesting i Python</h4>
-            <p class="muted">Notebook og sjekkliste for å komme i gang med datahåndtering, faktor‑testing og resultatevaluering.</p>
-            <a href="#" aria-disabled="true">Kommer snart</a>
-          </article>
-          <article class="card">
-            <h4 style="margin-top:0">Guide: Dataviz for kvant</h4>
-            <p class="muted">Beste praksis for å gjøre komplekse resultater forståelige.</p>
-            <a href="#" aria-disabled="true">Kommer snart</a>
-          </article>
-          <article class="card">
-            <h4 style="margin-top:0">Åpne datasett</h4>
-            <p class="muted">Lenkesamling til norske og internasjonale datasett relevante for kvantprosjekter.</p>
-            <a href="#" aria-disabled="true">Kommer snart</a>
-          </article>
-        </div>
-      </section>
+  <section id="event">
+    <div class="container">
+      <h2 class="reveal">Neste event</h2>
+      <div id="nextEvent" class="card event-card reveal" aria-live="polite">
+        <p class="event-empty">Laster kommende event…</p>
+      </div>
 
-      <section id="nyhetsbrev" class="section card">
-        <h2>Nyhetsbrev</h2>
-        <p>Få invitasjoner og sammendrag rett i innboksen. Ingen spam.</p>
-        <form class="newsletter" action="https://formspree.io/f/ERSTATT_MED_DIN_ID" method="POST" onsubmit="return newsletterSubmit(event)">
-          <label class="sr-only" for="email">E-post</label>
-          <input id="email" name="email" type="email" placeholder="din@epost.no" required />
-          <button class="btn" type="submit">Meld meg på</button>
-        </form>
-        <p id="newsletter-msg" class="notice" role="status" aria-live="polite"></p>
-      </section>
+      <!-- Adminpanel for enkel innlegging av events. Data lagres i localStorage i nettleseren. -->
+      <!-- Adminpanel er flyttet til en egen fil: admin.html -->
+    </div>
+  </section>
 
-      <section id="kontakt" class="section">
-        <h2>Kontakt</h2>
-        <div class="card">
-          <p>E‑post: <a href="mailto:kontakt@quantsociety.no">kontakt@quantsociety.no</a></p>
-          <p class="muted">Du kan også finne oss på GitHub/LinkedIn når de er klare.</p>
-        </div>
-      </section>
-    </main>
+  <section id="galleri">
+    <div class="container">
+      <h2 class="reveal">Gjengen vår</h2>
+      <div class="gallery reveal">
+        <!-- Legg bildefilen i samme mappe og sørg for navnet under -->
+        <img src="assets/IMG_1812.jpeg" alt="UIO Quant Society – gruppebilde" loading="lazy" id="groupPhoto"/>
+      </div>
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Forstørret bilde">
+        <img src="" alt="Forstørret bilde" />
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <small>© <span id="year"></span> Quant Society Norge · Org/forening (kommer) · <a href="#">Personvern</a></small>
-    </footer>
-  </div>
+  <section id="kontakt">
+    <div class="container grid cols-2">
+      <div class="reveal">
+        <h2>Kontakt oss</h2>
+        <p>Har du lyst til å bli med, eller er du en bedrift som ønsker samarbeid? Send oss en e‑post – vi svarer fortløpende.</p>
+        <p>
+          <a class="btn btn-primary" href="mailto:kontakt@quantsociety.no">kontakt@quantsociety.no</a>
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>Lenker</h3>
+        <ul>
+          <li><a href="#om-oss">Om oss</a></li>
+          <li><a href="#aktiviteter">Aktiviteter</a></li>
+          <li><a href="#event">Neste event</a></li>
+          <li><a href="#galleri">Gjengen</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <p>© <span id="year"></span> UIO Quant Society · <a href="mailto:kontakt@quantsociety.no">Kontakt oss</a></p>
+    </div>
+  </footer>
 
   <script>
-    function toggleNav(btn){
-      const nav = document.getElementById('nav');
-      const open = !nav.classList.contains('open');
-      nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // --- Små hjelpefunksjoner ---
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+
+    // --- Mobilmeny ---
+    const menuBtn = $('#menuBtn');
+    const menuList = $('#menuList');
+    if(menuBtn){
+      menuBtn.addEventListener('click', () => {
+        const open = menuList.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(open));
+      });
+      $$('#menuList a').forEach(a => a.addEventListener('click', ()=> menuList.classList.remove('open')));
     }
-    function newsletterSubmit(e){
-      e.preventDefault();
-      const msg = document.getElementById('newsletter-msg');
-      msg.textContent = 'Takk! Du får en bekreftelse på e-post (om dette var en ekte formularkobling).';
-      return false;
+
+    // --- Aktiv lenke ved scroll ---
+    const links = $$('.navlink');
+    const sections = links.map(l => $(l.getAttribute('href'))).filter(Boolean);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = '#' + entry.target.id;
+        const link = links.find(a => a.getAttribute('href') === id);
+        if(entry.isIntersecting){
+          links.forEach(a => a.classList.toggle('active', a===link));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => obs.observe(s));
+
+    // --- Scroll reveal ---
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); revealObs.unobserve(e.target); } })
+    }, {threshold: .12});
+    $$('.reveal').forEach(el => revealObs.observe(el));
+
+    // --- Lightbox for galleri ---
+    const lb = $('#lightbox');
+    const lbImg = $('#lightbox img');
+    $('#groupPhoto')?.addEventListener('click', (e)=>{
+      lbImg.src = e.currentTarget.src; lb.style.display='grid'; lb.focus();
+    });
+    lb?.addEventListener('click', ()=>{ lb.style.display='none'; lbImg.src=''; });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lb.style.display='none'; });
+
+    // --- Footer-år ---
+    $('#year').textContent = new Date().getFullYear();
+
+    // --- Eventhåndtering (offentlig) ---
+    // Nettsiden henter events fra assets/events.json og viser neste kommende event.
+
+    function toDate(e){ return new Date(`${e.date}T${e.time}:00`); }
+
+    async function fetchPublicEvents(){
+      try{
+        const res = await fetch('assets/events.json', {cache:'no-store'});
+        if(!res.ok) throw new Error('not found');
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
+      }catch{ return []; }
     }
-    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function renderNextEvent(){
+      const wrap = document.getElementById('nextEvent');
+      const events = (await fetchPublicEvents()).sort((a,b)=> toDate(a)-toDate(b));
+      const now = new Date();
+      const upcoming = events.find(e => toDate(e) >= now);
+      if(!upcoming){
+        wrap.innerHTML = '<p class="event-empty">Ingen kommende events enda – følg med her og på e‑post!</p>';
+        return;
+      }
+      const d = toDate(upcoming);
+      const dateStr = d.toLocaleString(undefined, { dateStyle:'full', timeStyle:'short' });
+      wrap.innerHTML = `
+        <h3>${escapeHtml(upcoming.title)}</h3>
+        <div class="meta">
+          <span class="chip" title="Dato og tid">${iconClock()} ${dateStr}</span>
+          <span class="chip" title="Sted">${iconPin()} ${escapeHtml(upcoming.place)}</span>
+        </div>
+        ${upcoming.description ? `<p>${escapeHtml(upcoming.description)}</p>` : ''}
+        <div class="event-actions">
+          <a class="btn btn-primary" href="${makeICS(upcoming)}" download="${slug(upcoming.title)}.ics">Legg i kalender</a>
+          <a class="btn btn-outline" href="#kontakt">Spørsmål? Kontakt oss</a>
+        </div>`;
+    }
+
+    function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m])); }
+
+    function makeICS(e){
+      const start = toDate(e);
+      const end = new Date(start.getTime() + 1000*60*90);
+      const dt = (d)=> d.toISOString().slice(0,19).replace(/[-:]/g,'') + 'Z';
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//UIO Quant Society//NO\nBEGIN:VEVENT\nUID:${crypto.randomUUID()}\nDTSTAMP:${dt(new Date())}\nDTSTART:${dt(start)}\nDTEND:${dt(end)}\nSUMMARY:${e.title}\nLOCATION:${e.place}\nDESCRIPTION:${e.description||''}\nEND:VEVENT\nEND:VCALENDAR`;
+      return 'data:text/calendar;charset=utf8,' + encodeURIComponent(ics);
+    }
+
+    // Første last
+    renderNextEvent();
+
+    // Ikoner (små inline SVG-er)
+    function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
+    function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
+    function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
+    function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
   </script>
 </body>
 </html>
-

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UIO Quant Society – Admin (Events)</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220; --surface:#0f1a2e; --surface2:#101a2b;
+      --primary:#60a5fa; --primary-strong:#3b82f6;
+      --text:#e5e7eb; --muted:#98a2b3; --shadow:0 8px 24px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+         color:var(--text); background:radial-gradient(1100px 600px at 10% -10%, rgba(59,130,246,.15), transparent),
+                              radial-gradient(1000px 700px at 90% 10%, rgba(2,132,199,.15), transparent),
+                              var(--bg);}
+    a{color:var(--primary)}
+    .container{max-width:1000px; margin:0 auto; padding:24px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px}
+    h1{font-size:clamp(22px,3.4vw,32px); margin:0}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+          border:1px solid rgba(255,255,255,.08); border-radius:var(--radius);
+          box-shadow:var(--shadow); padding:18px;}
+    .grid{display:grid; gap:16px}
+    .cols-2{grid-template-columns:2fr 3fr}
+    label{display:flex; flex-direction:column; gap:6px; font-weight:600}
+    input, textarea, select{background:rgba(255,255,255,.05); color:var(--text);
+      border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:.6rem .7rem}
+    textarea{min-height:96px}
+    .row{display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr; gap:10px}
+    .btn{appearance:none; border:none; border-radius:12px; padding:.8rem 1rem; font-weight:700; cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg, var(--primary-strong), var(--primary)); color:#0b1220}
+    .btn-outline{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18)}
+    .muted{color:var(--muted)}
+    table{width:100%; border-collapse:collapse}
+    th, td{padding:10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:left}
+    tr:hover{background:rgba(255,255,255,.03)}
+    .actions{display:flex; gap:.5rem}
+    @media (max-width:900px){ .cols-2{grid-template-columns:1fr} .row{grid-template-columns:1fr 1fr} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>UIO Quant Society – Admin (Events)</h1>
+      <div class="actions">
+        <label class="btn btn-outline" for="importFile">Importer events.json</label>
+        <input id="importFile" type="file" accept="application/json" style="display:none">
+        <button id="exportBtn" class="btn btn-primary">Last ned events.json</button>
+      </div>
+    </header>
+
+    <div class="grid cols-2">
+      <section class="card">
+        <h2 style="margin-top:0">Ny/rediger event</h2>
+        <form id="eventForm" autocomplete="off">
+          <label>Tittel
+            <input name="title" required placeholder="Workshop: Backtesting i Python">
+          </label>
+          <div class="row">
+            <label>Dato
+              <input name="date" type="date" required>
+            </label>
+            <label>Tid
+              <input name="time" type="time" required>
+            </label>
+            <label>Sted
+              <input name="place" required placeholder="UiO – Vilhelm Bjerknes hus">
+            </label>
+          </div>
+          <label>Beskrivelse (valgfritt)
+            <textarea name="description" placeholder="Kort tekst ..."></textarea>
+          </label>
+          <div class="actions" style="margin-top:10px">
+            <button class="btn btn-primary" type="submit" id="saveBtn">Lagre</button>
+            <button class="btn btn-outline" type="button" id="newBtn">Ny</button>
+            <span class="muted" id="msg" aria-live="polite"></span>
+          </div>
+        </form>
+        <p class="muted" style="margin-top:12px">
+          Tips: Når du er fornøyd – klikk “Last ned events.json” og last opp fila til
+          <code>assets/events.json</code> i repoet.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 style="margin-top:0">Kladdede events</h2>
+        <div class="muted" style="margin-bottom:8px">Lagring skjer lokalt i nettleseren din.</div>
+        <table id="tbl">
+          <thead>
+            <tr><th>Tittel</th><th>Dato</th><th>Tid</th><th>Sted</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="muted" id="emptyMsg" style="display:none">Ingen events i kladd ennå.</p>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:16px">
+      <h2 style="margin-top:0">Forhåndsvisning – neste event</h2>
+      <div id="preview"></div>
+    </section>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'uioqs_admin_events_v1';
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+
+    function load()  { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
+    function save(a) { localStorage.setItem(STORAGE_KEY, JSON.stringify(a)); }
+    function toDate(e){ return new Date(`${e.date}T${e.time}:00`); }
+    function sortEvents(a){ return a.sort((x,y)=> toDate(x)-toDate(y)); }
+
+    let editIndex = null;
+
+    function resetForm(){
+      $('#eventForm').reset();
+      editIndex = null;
+      $('#saveBtn').textContent = 'Lagre';
+    }
+
+    function fillForm(e){
+      for(const [k,v] of Object.entries(e)) { const el = $(`[name="${k}"]`); if(el) el.value = v; }
+    }
+
+    function formData(){
+      const fd = new FormData($('#eventForm'));
+      return Object.fromEntries(fd.entries());
+    }
+
+    function renderTable(){
+      const body = $('#tbl tbody');
+      const list = sortEvents(load());
+      body.innerHTML = list.map((e, i) => `
+        <tr>
+          <td>${escapeHtml(e.title)}</td>
+          <td>${e.date}</td>
+          <td>${e.time}</td>
+          <td>${escapeHtml(e.place)}</td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-outline" data-edit="${i}">Rediger</button>
+              <button class="btn" style="background:#1f2937;color:#e5e7eb" data-del="${i}">Slett</button>
+            </div>
+          </td>
+        </tr>`).join('');
+      $('#emptyMsg').style.display = list.length ? 'none' : 'block';
+
+      $$('[data-edit]').forEach(b => b.addEventListener('click', e => {
+        editIndex = Number(e.currentTarget.dataset.edit);
+        fillForm(load()[editIndex]);
+        $('#saveBtn').textContent = 'Oppdater';
+      }));
+      $$('[data-del]').forEach(b => b.addEventListener('click', e => {
+        const i = Number(e.currentTarget.dataset.del);
+        const arr = load(); arr.splice(i,1); save(arr);
+        renderTable(); renderPreview();
+      }));
+    }
+
+    function renderPreview(){
+      const arr = sortEvents(load());
+      const next = arr.find(e => toDate(e) >= new Date());
+      const box = $('#preview');
+      if(!next){ box.innerHTML = '<p class="muted">Ingen kommende event i kladden.</p>'; return; }
+      const d = toDate(next).toLocaleString(undefined, { dateStyle:'full', timeStyle:'short' });
+      box.innerHTML = `
+        <strong>${escapeHtml(next.title)}</strong><br>
+        <span class="muted">${d} – ${escapeHtml(next.place)}</span>
+        ${next.description ? `<p style="margin:.5rem 0 0">${escapeHtml(next.description)}</p>` : ''}`;
+    }
+
+    function exportJson(){
+      const events = sortEvents(load());
+      const blob = new Blob([JSON.stringify(events, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'events.json'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson(file){
+      const reader = new FileReader();
+      reader.onload = () => {
+        try{
+          const data = JSON.parse(reader.result);
+          if(!Array.isArray(data)) throw new Error('Feil format');
+          save(data);
+          renderTable(); renderPreview();
+          $('#msg').textContent = 'Importert!'; setTimeout(()=> $('#msg').textContent='', 1500);
+        }catch(err){ alert('Kunne ikke lese JSON: ' + err.message); }
+      };
+      reader.readAsText(file);
+    }
+
+    function escapeHtml(s){ return String(s).replace(/[&<>\"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;','\'':'&#39;'}[m])); }
+
+    // Handlers
+    $('#eventForm').addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const data = formData();
+      const arr = load();
+      if(editIndex===null){ arr.push(data); } else { arr[editIndex] = data; }
+      save(arr);
+      $('#msg').textContent = editIndex===null ? 'Lagret!' : 'Oppdatert!';
+      setTimeout(()=> $('#msg').textContent='', 1200);
+      resetForm();
+      renderTable(); renderPreview();
+    });
+
+    $('#newBtn').addEventListener('click', resetForm);
+    $('#exportBtn').addEventListener('click', exportJson);
+    $('#importFile').addEventListener('change', e => { if(e.target.files?.[0]) importJson(e.target.files[0]); });
+
+    // Init
+    renderTable(); renderPreview();
+  </script>
+</body>
+</html>
