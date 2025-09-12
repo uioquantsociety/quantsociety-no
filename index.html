@@ -172,6 +172,19 @@
     @media (max-width:480px){
       .container{padding:0 14px}
     }
+    /* Ekstra luft over hero-teksten på mobil */
+    @media (max-width: 900px){
+      .hero{
+        /* var 84px – øk for bedre luft */
+        padding-top: calc(112px + env(safe-area-inset-top));
+      }
+    }
+    @media (max-width: 480px){
+      .hero{
+        /* litt ekstra på veldig små skjermer */
+        padding-top: calc(128px + env(safe-area-inset-top));
+      }
+    }
   </style>
 </head>
 <body>
