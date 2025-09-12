@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #0b1220;          /* dyp bakgrunn */
-      --surface: #0f1a2e;     /* kort-bakgrunn */
+      --bg: #0b1220;
+      --surface: #0f1a2e;
       --surface-2: #101a2b;   
-      --primary: #60a5fa;     /* blå aksent */
+      --primary: #60a5fa;
       --primary-strong:#3b82f6;
-      --text: #e5e7eb;        /* lys skrift */
+      --text: #e5e7eb;
       --muted:#98a2b3;        
       --success:#22c55e;
       --warning:#f59e0b;
@@ -29,8 +29,10 @@
       color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.15), transparent),
                         radial-gradient(1200px 800px at 90% 10%, rgba(2,132,199,.15), transparent),
                         var(--bg);
+      /* Mobil-fix */
+      overflow-x:hidden;
     }
-    a{color:var(--primary)}
+    a{color:var(--primary); text-decoration:none}
     img{max-width:100%; height:auto;}
     .logo-on-dark{filter:brightness(0) invert(1) contrast(1.05) saturate(1.1);} 
     
@@ -41,8 +43,9 @@
     .brand{display:flex; align-items:center; gap:.75rem; text-decoration:none}
     .brand img{width:40px; height:40px; border-radius:8px}
     .brand span{font-weight:800; letter-spacing:.3px}
+    nav{position:relative;}
     nav ul{display:flex; gap:1rem; list-style:none; margin:0; padding:0}
-    nav a{display:inline-block; padding:.5rem .75rem; border-radius:999px; color:var(--text); text-decoration:none; font-weight:600; opacity:.9}
+    nav a{display:inline-block; padding:.5rem .75rem; border-radius:999px; color:var(--text); font-weight:600; opacity:.9}
     nav a:hover{background:rgba(255,255,255,.06)}
     nav a.active{background:linear-gradient(90deg, var(--primary-strong), var(--primary)); color:#0b1220}
     .menu-toggle{display:none; background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:.35rem .6rem}
@@ -69,17 +72,17 @@
     .card h3{margin-top:0}
     .muted{color:var(--muted)}
 
-    /* --- Forventninger: profesjonell, nøytral stil --- */
+    /* Forventninger */
     .card.expect{
       background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border: 1px solid rgba(148,163,184,.22); /* nøytral kant */
+      border: 1px solid rgba(148,163,184,.22);
     }
     .expect .features{display:grid; gap:12px}
     .expect .feat{
       display:flex; gap:.8rem; align-items:flex-start;
       padding:12px; border-radius:12px;
       background: rgba(255,255,255,.02);
-      border:1px solid rgba(148,163,184,.18); /* diskret linje */
+      border:1px solid rgba(148,163,184,.18);
     }
     .expect .feat-icon{
       flex:0 0 auto; display:grid; place-items:center;
@@ -91,7 +94,7 @@
     .expect .feat h4{margin:.1rem 0 .15rem; font-size:1.02rem}
     .expect .feat p{margin:0; color:var(--muted)}
 
-    /* --- Mer dynamiske aktivitetskort --- */
+    /* Aktiviteter */
     #aktiviteter .card{position:relative; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
     #aktiviteter .card:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.45)}
     #aktiviteter .card::before{content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--accent, rgba(96,165,250,.6)), transparent)}
@@ -100,27 +103,38 @@
     #aktiviteter .card:nth-child(2){--accent:rgba(139,92,246,.65); border-color:rgba(139,92,246,.35)}
     #aktiviteter .card:nth-child(3){--accent:rgba(245,158,11,.65); border-color:rgba(245,158,11,.35)}
 
-    /* Next Event */
+    /* Events */
     .event-card .meta{display:flex; flex-wrap:wrap; gap:.6rem; margin:.6rem 0 1rem}
-    .chip{display:inline-flex; align-items:center; gap:.4rem; background:rgba(96,165,250,.15); border:1px solid rgba(96,165,250,.35); padding:.35rem .6rem; border-radius:999px; font-size:.9rem}
+    .chip{display:inline-flex; align-items:center; gap:.4rem; background:rgba(96,165,250,.15); border:1px solid rgba(96,165,250,.35); padding:.35rem .6rem; border-radius:999px; font-size:.9rem; min-width:0}
     .chip svg{width:16px; height:16px}
     .event-empty{color:var(--muted); font-style:italic}
     .events-list{display:grid; gap:16px}
     .event-card.past{opacity:.75;}
-    /* Mer luft under "Legg i kalender"-knappen */
-    .event-card { padding-bottom: 28px; }   /* øk til 32px om du vil ha mer */
+    .event-card { padding-bottom: 28px; }
     .event-card .event-actions { margin-top: 12px; }
+    .events-list, .event-card, .meta{overflow-wrap:anywhere}
 
-
-    /* Gallery */
+    /* Galleri */
     .gallery{display:grid; grid-template-columns:1fr; gap:16px}
     .gallery img{border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); cursor:pointer}
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; place-items:center; z-index:2000}
     .lightbox img{max-width:92vw; max-height:90vh; border-radius:10px}
 
+    /* Vårt arbeid – egen seksjon med mer luft */
+    #work.section--work{padding:96px 0}
+    #work .lead{max-width:68ch}
+    #work .repo-list{display:grid; gap:12px; grid-template-columns:1fr}
+    .repo-card{display:block; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      box-shadow:var(--shadow); color:inherit}
+    .repo-card h4{margin:.1rem 0 .2rem; font-size:1.05rem}
+    .repo-card p{margin:0; color:var(--muted)}
+    @media (min-width:700px){ #work .repo-list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (min-width:1000px){ #work .repo-list{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
     /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.06); padding:36px 0; text-align:center}
-    .foot a{font-weight:700; text-decoration:none}
+    .foot a{font-weight:700}
 
     /* Utilities */
     .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
@@ -132,9 +146,16 @@
       .hero-inner{grid-template-columns:1fr}
       .cols-2{grid-template-columns:1fr}
       .cols-3{grid-template-columns:1fr}
-      nav ul{display:none; position:absolute; top:64px; right:10px; background:rgba(5,10,20,.95); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:12px}
+      nav ul{
+        display:none; position:absolute; top:64px; left:12px; right:12px;
+        background:rgba(5,10,20,.95); border:1px solid rgba(255,255,255,.08);
+        padding:10px; border-radius:12px
+      }
       nav ul.open{display:flex; flex-direction:column}
       .menu-toggle{display:inline-flex}
+    }
+    @media (max-width:480px){
+      .container{padding:0 14px}
     }
   </style>
 </head>
@@ -153,6 +174,7 @@
           <li><a href="#aktiviteter" class="navlink">Aktiviteter</a></li>
           <li><a href="#event" class="navlink">Neste event</a></li>
           <li><a href="#galleri" class="navlink">Galleri</a></li>
+          <li><a href="#work" class="navlink">Vårt arbeid</a></li><!-- NY i menyen -->
           <li><a href="#kontakt" class="navlink">Kontakt</a></li>
         </ul>
       </nav>
@@ -183,13 +205,11 @@
         <p>Slagordet vårt er <strong>«en bro mellom skolebenken og arbeidslivet»</strong>. Hos oss får du praktisk erfaring ved å lage og teste strategier, arbeide i team og presentere resultater – akkurat slik det ofte gjøres i industrien.</p>
       </div>
 
-      <!-- Oppdatert forventningsbolk -->
       <div class="card reveal expect">
         <h3>Hva kan du forvente?</h3>
         <div class="features" role="list">
           <div class="feat" role="listitem">
             <div class="feat-icon" aria-hidden="true">
-              <!-- Læring (check) -->
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20 6L9 17l-5-5"/>
               </svg>
@@ -202,7 +222,6 @@
 
           <div class="feat" role="listitem">
             <div class="feat-icon" aria-hidden="true">
-              <!-- Faglig fellesskap (stabler/lag) -->
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 20l9-5-9-5-9 5 9 5z"/>
                 <path d="M12 12l9-5-9-5-9 5 9 5z"/>
@@ -216,7 +235,6 @@
 
           <div class="feat" role="listitem">
             <div class="feat-icon" aria-hidden="true">
-              <!-- Karriere- og bransjekontakt (koffert) -->
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 7V6a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v1"/>
                 <rect x="3" y="7" width="18" height="13" rx="2"/>
@@ -230,7 +248,6 @@
           </div>
         </div>
       </div>
-      <!-- slutt forventningsbolk -->
     </div>
   </section>
 
@@ -275,6 +292,18 @@
     </div>
   </section>
 
+  <!-- NY EGEN SEKSJON: Vårt arbeid (plassert over 'Sosiale medier') -->
+  <section id="work" class="section--work">
+    <div class="container">
+      <h2 class="reveal">Vårt arbeid</h2>
+      <p class="muted lead reveal">Vi deler arbeidet vårt etterhvert som vi skaper nye strategier. Første forventes ferdig i september.</p>
+      <div id="repoList" class="repo-list reveal" aria-live="polite"><!-- Populeres av JS --></div>
+      <div class="cta reveal" style="margin-top:14px">
+        <a class="btn btn-primary" id="ghOrgBtn" href="https://github.com/uioquantsociety" target="_blank" rel="noopener">Se GitHub-organisasjonen</a>
+      </div>
+    </div>
+  </section>
+
   <section id="sosiale">
     <div class="container">
       <h2 class="reveal">Sosiale medier</h2>
@@ -283,7 +312,6 @@
         <a class="btn btn-primary" href="https://www.instagram.com/uioquantsociety/" target="_blank" rel="noopener">Instagram</a>
         <a class="btn btn-outline" href="https://www.linkedin.com/company/uio-quant-society" target="_blank" rel="noopener">LinkedIn</a>
       </div>
-      <!-- LinkedIn embed fjernet -->
     </div>
   </section>
 
@@ -304,11 +332,17 @@
   </footer>
 
   <script>
-    // --- Små hjelpefunksjoner ---
+    /* --- GitHub-konfig --- */
+    const GITHUB_ORG = 'uioquantsociety'; // endre ved behov
+    const GITHUB_REPOS = [
+      // { name:'mean-reversion-starter', description:'En enkel MR-strategi med backtest', html_url:'https://github.com/uioquantsociety/mean-reversion-starter' },
+    ];
+
+    /* Hjelpere */
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
 
-    // --- Mobilmeny ---
+    /* Mobilmeny */
     const menuBtn = $('#menuBtn');
     const menuList = $('#menuList');
     if(menuBtn){
@@ -319,7 +353,7 @@
       $$('#menuList a').forEach(a => a.addEventListener('click', ()=> menuList.classList.remove('open')));
     }
 
-    // --- Aktiv lenke ved scroll ---
+    /* Aktiv lenke ved scroll */
     const links = $$('.navlink');
     const sections = links.map(l => $(l.getAttribute('href'))).filter(Boolean);
     const obs = new IntersectionObserver(entries => {
@@ -333,13 +367,13 @@
     }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
     sections.forEach(s => obs.observe(s));
 
-    // --- Scroll reveal ---
+    /* Scroll reveal */
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); revealObs.unobserve(e.target); } })
     }, {threshold: .12});
     $$('.reveal').forEach(el => revealObs.observe(el));
 
-    // --- Lightbox for galleri ---
+    /* Lightbox */
     const lb = $('#lightbox');
     const lbImg = $('#lightbox img');
     $('#groupPhoto')?.addEventListener('click', (e)=>{
@@ -348,10 +382,10 @@
     lb?.addEventListener('click', ()=>{ lb.style.display='none'; lbImg.src=''; });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lb.style.display='none'; });
 
-    // --- Footer-år ---
+    /* Footer-år */
     $('#year').textContent = new Date().getFullYear();
 
-    // --- Eventhåndtering (offentlig) ---
+    /* Events */
     function toDate(e){ return new Date(`${e.date}T${e.time}:00`); }
     function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m])); }
@@ -409,13 +443,53 @@ END:VCALENDAR`;
           </article>`;
       }).join('');
     }
-
-    // Første last
     renderEvents();
 
-    // Ikoner (små inline SVG-er)
+    /* Ikoner */
     function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
     function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
+
+    /* GitHub – repo-liste */
+    async function renderRepos(){
+      const list = document.getElementById('repoList');
+      const orgBtn = document.getElementById('ghOrgBtn');
+      const GITHUB_ORG = 'UIO-Quant-Society';
+
+      if(!list) return;
+
+      if(orgBtn && GITHUB_ORG){
+        orgBtn.href = `https://github.com/orgs/${encodeURIComponent(GITHUB_ORG)}`;
+      }
+
+      let repos = Array.isArray(GITHUB_REPOS) ? GITHUB_REPOS.filter(r => r?.name) : [];
+
+      if(!repos.length && GITHUB_ORG){
+        try{
+          const res = await fetch(`https://api.github.com/orgs/${encodeURIComponent(GITHUB_ORG)}/repos?per_page=9&sort=updated`);
+          if(res.ok){
+            const data = await res.json();
+            repos = (data||[]).slice(0,9).map(r => ({
+              name: r.name,
+              description: r.description || '',
+              html_url: r.html_url
+            }));
+          }
+        }catch{/* stillhet */}
+      }
+
+      if(!repos.length){
+        list.innerHTML = '<p class="muted">Repoer kommer fortløpende.</p>';
+        return;
+      }
+
+      list.innerHTML = repos.map(r => `
+        <a class="repo-card" href="${r.html_url || `https://github.com/${encodeURIComponent(GITHUB_ORG)}/${encodeURIComponent(r.name)}`}" target="_blank" rel="noopener">
+          <h4>${escapeHtml(r.name)}</h4>
+          ${r.description ? `<p>${escapeHtml(r.description)}</p>` : '<p>Se kode og README på GitHub.</p>'}
+        </a>
+      `).join('');
+    }
+    renderRepos();
   </script>
 </body>
 </html>
