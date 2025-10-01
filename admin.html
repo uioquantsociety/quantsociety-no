@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="no">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,60 +48,60 @@
     <header>
       <h1>UIO Quant Society – Admin (Events)</h1>
       <div class="actions">
-        <label class="btn btn-outline" for="importFile">Importer events.json</label>
+        <label class="btn btn-outline" for="importFile">Import events.json</label>
         <input id="importFile" type="file" accept="application/json" style="display:none">
-        <button id="exportBtn" class="btn btn-primary">Last ned events.json</button>
+        <button id="exportBtn" class="btn btn-primary">Download events.json</button>
       </div>
     </header>
 
     <div class="grid cols-2">
       <section class="card">
-        <h2 style="margin-top:0">Ny/rediger event</h2>
+        <h2 style="margin-top:0">New / edit event</h2>
         <form id="eventForm" autocomplete="off">
-          <label>Tittel
-            <input name="title" required placeholder="Workshop: Backtesting i Python">
+          <label>Title
+            <input name="title" required placeholder="Workshop: Backtesting in Python">
           </label>
           <div class="row">
-            <label>Dato
+            <label>Date
               <input name="date" type="date" required>
             </label>
-            <label>Tid
+            <label>Time
               <input name="time" type="time" required>
             </label>
-            <label>Sted
-              <input name="place" required placeholder="UiO – Vilhelm Bjerknes hus">
+            <label>Place
+              <input name="place" required placeholder="UiO — Vilhelm Bjerknes House">
             </label>
           </div>
-          <label>Beskrivelse (valgfritt)
-            <textarea name="description" placeholder="Kort tekst ..."></textarea>
+          <label>Description (optional)
+            <textarea name="description" placeholder="Short blurb..."></textarea>
           </label>
           <div class="actions" style="margin-top:10px">
-            <button class="btn btn-primary" type="submit" id="saveBtn">Lagre</button>
-            <button class="btn btn-outline" type="button" id="newBtn">Ny</button>
+            <button class="btn btn-primary" type="submit" id="saveBtn">Save</button>
+            <button class="btn btn-outline" type="button" id="newBtn">New</button>
             <span class="muted" id="msg" aria-live="polite"></span>
           </div>
         </form>
         <p class="muted" style="margin-top:12px">
-          Tips: Når du er fornøyd – klikk “Last ned events.json” og last opp fila til
-          <code>assets/events.json</code> i repoet.
+          Tip: when you’re happy, click “Download events.json” and upload the file to
+          <code>assets/events.json</code> in the repo.
         </p>
       </section>
 
       <section class="card">
-        <h2 style="margin-top:0">Kladdede events</h2>
-        <div class="muted" style="margin-bottom:8px">Lagring skjer lokalt i nettleseren din.</div>
+        <h2 style="margin-top:0">Draft events</h2>
+        <div class="muted" style="margin-bottom:8px">Drafts are saved locally in your browser.</div>
         <table id="tbl">
           <thead>
-            <tr><th>Tittel</th><th>Dato</th><th>Tid</th><th>Sted</th><th></th></tr>
+            <tr><th>Title</th><th>Date</th><th>Time</th><th>Place</th><th></th></tr>
           </thead>
           <tbody></tbody>
         </table>
-        <p class="muted" id="emptyMsg" style="display:none">Ingen events i kladd ennå.</p>
+        <p class="muted" id="emptyMsg" style="display:none">No draft events yet.</p>
       </section>
     </div>
 
     <section class="card" style="margin-top:16px">
-      <h2 style="margin-top:0">Forhåndsvisning – neste event</h2>
+      <h2 style="margin-top:0">Preview — next event</h2>
       <div id="preview"></div>
     </section>
   </div>
@@ -121,7 +121,7 @@
     function resetForm(){
       $('#eventForm').reset();
       editIndex = null;
-      $('#saveBtn').textContent = 'Lagre';
+      $('#saveBtn').textContent = 'Save';
     }
 
     function fillForm(e){
@@ -144,8 +144,8 @@
           <td>${escapeHtml(e.place)}</td>
           <td>
             <div class="actions">
-              <button class="btn btn-outline" data-edit="${i}">Rediger</button>
-              <button class="btn" style="background:#1f2937;color:#e5e7eb" data-del="${i}">Slett</button>
+              <button class="btn btn-outline" data-edit="${i}">Edit</button>
+              <button class="btn" style="background:#1f2937;color:#e5e7eb" data-del="${i}">Delete</button>
             </div>
           </td>
         </tr>`).join('');
@@ -154,7 +154,7 @@
       $$('[data-edit]').forEach(b => b.addEventListener('click', e => {
         editIndex = Number(e.currentTarget.dataset.edit);
         fillForm(load()[editIndex]);
-        $('#saveBtn').textContent = 'Oppdater';
+        $('#saveBtn').textContent = 'Update';
       }));
       $$('[data-del]').forEach(b => b.addEventListener('click', e => {
         const i = Number(e.currentTarget.dataset.del);
@@ -167,11 +167,11 @@
       const arr = sortEvents(load());
       const next = arr.find(e => toDate(e) >= new Date());
       const box = $('#preview');
-      if(!next){ box.innerHTML = '<p class="muted">Ingen kommende event i kladden.</p>'; return; }
+      if(!next){ box.innerHTML = '<p class="muted">No upcoming event in drafts.</p>'; return; }
       const d = toDate(next).toLocaleString(undefined, { dateStyle:'full', timeStyle:'short' });
       box.innerHTML = `
         <strong>${escapeHtml(next.title)}</strong><br>
-        <span class="muted">${d} – ${escapeHtml(next.place)}</span>
+        <span class="muted">${d} — ${escapeHtml(next.place)}</span>
         ${next.description ? `<p style="margin:.5rem 0 0">${escapeHtml(next.description)}</p>` : ''}`;
     }
 
@@ -189,11 +189,11 @@
       reader.onload = () => {
         try{
           const data = JSON.parse(reader.result);
-          if(!Array.isArray(data)) throw new Error('Feil format');
+          if(!Array.isArray(data)) throw new Error('Wrong format');
           save(data);
           renderTable(); renderPreview();
-          $('#msg').textContent = 'Importert!'; setTimeout(()=> $('#msg').textContent='', 1500);
-        }catch(err){ alert('Kunne ikke lese JSON: ' + err.message); }
+          $('#msg').textContent = 'Imported!'; setTimeout(()=> $('#msg').textContent='', 1500);
+        }catch(err){ alert('Could not read JSON: ' + err.message); }
       };
       reader.readAsText(file);
     }
@@ -207,7 +207,7 @@
       const arr = load();
       if(editIndex===null){ arr.push(data); } else { arr[editIndex] = data; }
       save(arr);
-      $('#msg').textContent = editIndex===null ? 'Lagret!' : 'Oppdatert!';
+      $('#msg').textContent = editIndex===null ? 'Saved!' : 'Updated!';
       setTimeout(()=> $('#msg').textContent='', 1200);
       resetForm();
       renderTable(); renderPreview();

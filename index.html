@@ -1,22 +1,22 @@
 <!doctype html>
-<html lang="no">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <!-- Hindrer zoom/pinch på mobil -->
+  <!-- Prevent zoom/pinch on mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>UIO Quant Society</title>
-  <meta name="description" content="UIO Quant Society – en bro mellom skolebenken og arbeidslivet. Forening ved UiO for kvantitativ finans, algoritmisk trading og faglige/sosiale kvelder." />
+  <meta name="description" content="UIO Quant Society — A bridge between university and the industry. A UiO student society for quantitative finance, algorithmic trading, and relaxed learning/social evenings." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg: #0b1220;
       --surface: #0f1a2e;
-      --surface-2: #101a2b;   
+      --surface-2: #101a2b;
       --primary: #60a5fa;
       --primary-strong:#3b82f6;
       --text: #e5e7eb;
-      --muted:#98a2b3;        
+      --muted:#98a2b3;
       --success:#22c55e;
       --warning:#f59e0b;
       --danger:#ef4444;
@@ -30,13 +30,13 @@
       color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.15), transparent),
                         radial-gradient(1200px 800px at 90% 10%, rgba(2,132,199,.15), transparent),
                         var(--bg);
-      overflow-x:hidden; /* hindrer horisontal-scroll */
+      overflow-x:hidden;
       -webkit-text-size-adjust: 100%;
-      touch-action: manipulation; /* reduserer dobbeltrykk-zoom */
+      touch-action: manipulation;
     }
     a{color:var(--primary); text-decoration:none}
     img{max-width:100%; height:auto;}
-    .logo-on-dark{filter:brightness(0) invert(1) contrast(1.05) saturate(1.1);} 
+    .logo-on-dark{filter:brightness(0) invert(1) contrast(1.05) saturate(1.1);}
     body.no-scroll{overflow:hidden; position:relative;}
 
     /* Header / Nav */
@@ -58,7 +58,7 @@
     nav a:hover{background:rgba(255,255,255,.08)}
     nav a.active{background:linear-gradient(90deg, var(--primary-strong), var(--primary)); color:#0b1220}
 
-    /* Meny-knapp (hamburger→X) */
+    /* Menu button (hamburger→X) */
     .menu-toggle{
       display:none; align-items:center; gap:.5rem;
       background:transparent; color:var(--text);
@@ -71,7 +71,7 @@
     .menu-toggle[aria-expanded="true"] .bar-mid{opacity:0}
     .menu-toggle[aria-expanded="true"] .bar-bot{transform:translateY(-6px) rotate(-45deg)}
 
-    /* Bakteppe for mobilmeny */
+    /* Backdrop for mobile nav */
     .nav-backdrop{
       position:fixed; inset:0; background:rgba(0,0,0,.55);
       opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:900;
@@ -100,7 +100,7 @@
     .card h3{margin-top:0}
     .muted{color:var(--muted)}
 
-    /* Forventninger */
+    /* Expectations */
     .card.expect{background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border: 1px solid rgba(148,163,184,.22)}
     .expect .features{display:grid; gap:12px}
     .expect .feat{display:flex; gap:.8rem; align-items:flex-start; padding:12px; border-radius:12px; background: rgba(255,255,255,.02); border:1px solid rgba(148,163,184,.18)}
@@ -109,7 +109,7 @@
     .expect .feat h4{margin:.1rem 0 .15rem; font-size:1.02rem}
     .expect .feat p{margin:0; color:var(--muted)}
 
-    /* Aktiviteter */
+    /* Activities */
     #aktiviteter .card{position:relative; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
     #aktiviteter .card:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.45)}
     #aktiviteter .card::before{content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--accent, rgba(96,165,250,.6)), transparent)}
@@ -129,13 +129,13 @@
     .event-card .event-actions { margin-top: 12px; }
     .events-list, .event-card, .meta{overflow-wrap:anywhere}
 
-    /* Galleri */
+    /* Gallery */
     .gallery{display:grid; grid-template-columns:1fr; gap:16px}
     .gallery img{border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); cursor:pointer}
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.85); display:none; place-items:center; z-index:2000}
     .lightbox img{max-width:92vw; max-height:90vh; border-radius:10px}
 
-    /* Vårt arbeid – egen seksjon med mer luft */
+    /* Our work */
     #work.section--work{padding:96px 0}
     #work .lead{max-width:68ch}
     #work .repo-list{display:grid; gap:12px; grid-template-columns:1fr}
@@ -150,7 +150,7 @@
     footer{border-top:1px solid rgba(255,255,255,.06); padding:36px 0; text-align:center}
     .foot a{font-weight:700}
 
-    /* Responsive – mobilpanel for meny */
+    /* Responsive – mobile nav */
     @media (max-width:900px){
       .hero-inner{grid-template-columns:1fr}
       .cols-2{grid-template-columns:1fr}
@@ -158,7 +158,7 @@
       .menu-toggle{display:inline-flex}
       nav ul{
         display:none; position:fixed; z-index:950;
-        top:64px; left:12px; right:12px; 
+        top:64px; left:12px; right:12px;
         max-height:calc(100dvh - 64px - 24px); overflow:auto;
         flex-direction:column; gap:.25rem; padding:10px;
         background:rgba(5,10,20,.96);
@@ -169,34 +169,21 @@
       nav ul.open{display:flex}
       nav a{padding:.8rem 1rem; border-radius:10px}
     }
-    @media (max-width:480px){
-      .container{padding:0 14px}
-    }
-    /* Ekstra luft over hero-teksten på mobil */
-    @media (max-width: 900px){
-      .hero{
-        /* var 84px – øk for bedre luft */
-        padding-top: calc(80px + env(safe-area-inset-top));
-      }
-    }
-    @media (max-width: 480px){
-      .hero{
-        /* litt ekstra på veldig små skjermer */
-        padding-top: calc(100px + env(safe-area-inset-top));
-      }
-    }
+    @media (max-width:480px){ .container{padding:0 14px} }
+    @media (max-width: 900px){ .hero{ padding-top: calc(80px + env(safe-area-inset-top)); } }
+    @media (max-width: 480px){ .hero{ padding-top: calc(100px + env(safe-area-inset-top)); } }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="#home" aria-label="Gå til toppen">
+      <a class="brand" href="#home" aria-label="Go to top">
         <img class="logo-on-dark" src="assets/UIO-Quant-Society-Logo.png" alt="UIO Quant Society logo" loading="lazy">
         <span>UIO Quant Society</span>
       </a>
-      <nav aria-label="Hovedmeny">
-        <button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="menuList" aria-label="Meny" type="button">
-          <span class="sr-only">Meny</span>
+      <nav aria-label="Main menu">
+        <button class="menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="menuList" aria-label="Menu" type="button">
+          <span class="sr-only">Menu</span>
           <span class="hamburger" aria-hidden="true">
             <span class="bar bar-top"></span>
             <span class="bar bar-mid"></span>
@@ -204,28 +191,28 @@
           </span>
         </button>
         <ul id="menuList">
-          <li><a href="#home" class="navlink">Hjem</a></li>
-          <li><a href="#om-oss" class="navlink">Om oss</a></li>
-          <li><a href="#aktiviteter" class="navlink">Aktiviteter</a></li>
-          <li><a href="#event" class="navlink">Neste event</a></li>
-          <li><a href="#galleri" class="navlink">Galleri</a></li>
-          <li><a href="#work" class="navlink">Vårt arbeid</a></li>
-          <li><a href="#kontakt" class="navlink">Kontakt</a></li>
+          <li><a href="#home" class="navlink">Home</a></li>
+          <li><a href="#om-oss" class="navlink">About</a></li>
+          <li><a href="#aktiviteter" class="navlink">Activities</a></li>
+          <li><a href="#event" class="navlink">Next event</a></li>
+          <li><a href="#galleri" class="navlink">Gallery</a></li>
+          <li><a href="#work" class="navlink">Our work</a></li>
+          <li><a href="#kontakt" class="navlink">Contact</a></li>
         </ul>
       </nav>
     </div>
-    <!-- Overlay for mobilmeny -->
+    <!-- Mobile menu overlay -->
     <div class="nav-backdrop" id="navBackdrop"></div>
   </header>
 
   <main id="home" class="hero container">
     <div class="hero-inner">
       <div>
-        <h1>En bro mellom skolebenken og arbeidslivet</h1>
-        <p class="tagline">Vi er UIO Quant Society – en studentdrevet forening for deg som er nysgjerrig på kvantitativ finans, algoritmisk trading og datadrevne investeringsstrategier.</p>
+        <h1>A bridge between university and work life</h1>
+        <p class="tagline">We’re UIO Quant Society, a student-run community for anyone curious about quantitative finance, algorithmic trading, and data-driven investing.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="#om-oss">Les mer</a>
-          <a class="btn btn-outline" href="mailto:kontakt@quantsociety.no">Bli med / Ta kontakt</a>
+          <a class="btn btn-primary" href="#om-oss">Learn more</a>
+          <a class="btn btn-outline" href="mailto:kontakt@quantsociety.no">Join / Contact</a>
         </div>
       </div>
       <div class="hero-card reveal" aria-hidden="true">
@@ -237,21 +224,21 @@
   <section id="om-oss">
     <div class="container grid cols-2">
       <div class="reveal">
-        <h2>Om oss</h2>
-        <p>UIO Quant Society samler studenter med interesse for matematikk, informatikk, økonomi og statistikk – kort sagt <em>kvant</em>. Vi bygger ferdigheter som brukes i finansbransjen: dataanalyse, modellering, optimalisering og risikostyring. Samtidig skaper vi et sosialt miljø der det er lav terskel for å lære og dele.</p>
-        <p>Slagordet vårt er <strong>«en bro mellom skolebenken og arbeidslivet»</strong>. Hos oss får du praktisk erfaring ved å lage og teste strategier, arbeide i team og presentere resultater – akkurat slik det ofte gjøres i industrien.</p>
+        <h2>About us</h2>
+        <p>UIO Quant Society brings together students who enjoy math, computer science, economics, and statistics. We build skills used in finance: data analysis, modelling, optimisation, and risk management. Just as important, we keep the vibe friendly and low-pressure so it’s easy to learn and share.</p>
+        <p>Our motto is <strong>“a bridge between campus and work life.”</strong> You’ll get practice building and testing strategies, working in teams, and presenting results. </p>
       </div>
 
       <div class="card reveal expect">
-        <h3>Hva kan du forvente?</h3>
+        <h3>What to expect</h3>
         <div class="features" role="list">
           <div class="feat" role="listitem">
             <div class="feat-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
             <div>
-              <h4>Læring</h4>
-              <p>Praktiske workshops, foredrag og prosjektoppgaver innen kvant, dataanalyse og programmering.</p>
+              <h4>Learning</h4>
+              <p>Workshops, talks, and small projects across quant, data analysis, and programming.</p>
             </div>
           </div>
 
@@ -260,8 +247,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12l9-5-9-5-9 5 9 5z"/></svg>
             </div>
             <div>
-              <h4>Faglig fellesskap</h4>
-              <p>Sparring og diskusjoner på tvers av fag. Del erfaringer, bygg kompetanse og lær av hverandre.</p>
+              <h4>Community</h4>
+              <p>Sparring and discussion across disciplines. Share experiences, build competence, learn from each other.</p>
             </div>
           </div>
 
@@ -270,8 +257,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7V6a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v1"/><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 12h18"/></svg>
             </div>
             <div>
-              <h4>Karriere- og bransjekontakt</h4>
-              <p>Bedriftsmøter, case-kvelder og konkrete tips til CV/intervju – kobling mot relevante arbeidsgivere.</p>
+              <h4>Career connections</h4>
+              <p>Company meetups, case evenings, and concrete tips for CVs and interviews — a direct link to relevant employers.</p>
             </div>
           </div>
         </div>
@@ -281,19 +268,19 @@
 
   <section id="aktiviteter">
     <div class="container">
-      <h2 class="reveal">Aktiviteter</h2>
+      <h2 class="reveal">Activities</h2>
       <div class="grid cols-3">
         <article class="card reveal">
-          <h3>Algoritmisk trading</h3>
-          <p>Vi utvikler, backtester og diskuterer handelsstrategier i Python. Fokus på datakvalitet, signaler, risiko og robusthet.</p>
+          <h3>Algorithmic trading</h3>
+          <p>We develop, backtest, and discuss trading strategies in Python. Focus on clean data, signals, risk, and robustness.</p>
         </article>
         <article class="card reveal">
-          <h3>Intervjuforberedelser</h3>
-          <p>Brain teasers, sannsynlighet, statistikk, finansmatte og koding – akkurat slik du møter i kvant-intervjuer.</p>
+          <h3>Interview prep</h3>
+          <p>Brain teasers, probability, statistics, financial math, and coding — the type of problems you’ll meet in quant interviews.</p>
         </article>
         <article class="card reveal">
-          <h3>Sosiale kvelder</h3>
-          <p>Kort foredrag + pizza + diskusjoner. Del erfaringer, få innspill til prosjekter og bli kjent med nye quants.</p>
+          <h3>Social evenings</h3>
+          <p>Open discussion, share progress and ideas, socialize with other quants.</p>
         </article>
       </div>
     </div>
@@ -301,77 +288,72 @@
 
   <section id="event">
     <div class="container">
-      <h2 class="reveal">Kommende events</h2>
+      <h2 class="reveal">Upcoming events</h2>
       <div id="eventsWrap" class="events-list reveal" aria-live="polite">
-        <p class="event-empty">Laster events…</p>
+        <p class="event-empty">Loading events…</p>
       </div>
     </div>
   </section>
 
   <section id="galleri">
     <div class="container">
-      <h2 class="reveal">Gjengen vår</h2>
+      <h2 class="reveal">Our team</h2>
       <div class="gallery reveal">
-        <img src="assets/IMG_1812.jpeg" alt="UIO Quant Society – gruppebilde" loading="lazy" id="groupPhoto"/>
+        <img src="assets/IMG_1812.jpeg" alt="UIO Quant Society group photo" loading="lazy" id="groupPhoto"/>
       </div>
-      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Forstørret bilde">
-        <img src="" alt="Forstørret bilde" />
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image">
+        <img src="" alt="Enlarged image" />
       </div>
     </div>
   </section>
 
-  <!-- Vårt arbeid (egen seksjon over Sosiale medier) -->
+  <!-- Our work -->
   <section id="work" class="section--work">
     <div class="container">
-      <h2 class="reveal">Vårt arbeid</h2>
-      <p class="muted lead reveal">Vi deler arbeidet vårt etterhvert som vi skaper nye strategier. Første forventes ferdig i september.</p>
-      <div id="repoList" class="repo-list reveal" aria-live="polite"><!-- Populeres av JS --></div>
+      <h2 class="reveal">Our work</h2>
+      <p class="muted lead reveal">We’ll share projects as we build them. The first ones will be ready soon.</p>
+      <div id="repoList" class="repo-list reveal" aria-live="polite"></div>
       <div class="cta reveal" style="margin-top:14px">
-        <a class="btn btn-primary" id="ghOrgBtn" href="https://github.com/orgs/UIO-Quant-Society" target="_blank" rel="noopener">Se GitHub-organisasjonen</a>
+        <a class="btn btn-primary" id="ghOrgBtn" href="https://github.com/orgs/UIO-Quant-Society" target="_blank" rel="noopener">View our GitHub org</a>
       </div>
     </div>
   </section>
 
   <section id="sosiale">
     <div class="container">
-      <h2 class="reveal">Sosiale medier</h2>
-      <p class="muted reveal">Følg oss for oppdateringer om events og prosjekter.</p>
+      <h2 class="reveal">Social media</h2>
+      <p class="muted reveal">Follow us for updates on events and projects.</p>
       <div class="cta reveal">
         <a class="btn btn-primary" href="https://www.instagram.com/uioquantsociety/" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn btn-outline" href="https://www.linkedin.com/company/uio-quant-society" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-primary" href="https://www.linkedin.com/company/uio-quant-society" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </section>
 
   <section id="kontakt">
     <div class="container">
-      <h2>Kontakt oss</h2>
-      <p>Har du lyst til å bli med, eller er du en bedrift som ønsker samarbeid? Send oss en e-post – vi svarer fortløpende.</p>
+      <h2>Contact</h2>
+      <p>Want to join, or represent a company that wants to collaborate? Send us an email, we will reply quickly.</p>
       <p><a class="btn btn-primary" href="mailto:kontakt@quantsociety.no">kontakt@quantsociety.no</a></p>
     </div>
   </section>
 
   <footer>
     <div class="container foot">
-      <p>© <span id="year"></span> UIO Quant Society · <a href="mailto:kontakt@quantsociety.no">Kontakt oss</a></p>
+      <p>© <span id="year"></span> UIO Quant Society · <a href="mailto:kontakt@quantsociety.no">Contact us</a></p>
     </div>
   </footer>
 
   <script>
-    /* --- GitHub-konfig --- */
-    // Sett org-navn (brukes både i knapp og API-kall)
+    /* --- GitHub config --- */
     const GITHUB_ORG = 'UIO-Quant-Society';
+    const GITHUB_REPOS = [];
 
-    // Valgfritt: list opp repos manuelt. Hvis tomt, hentes fra GitHub API.
-    const GITHUB_REPOS = [
-      // { name:'mean-reversion-starter', description:'En enkel MR-strategi med backtest', html_url:'https://github.com/UIO-Quant-Society/mean-reversion-starter' },
-    ];
-
-    /* Hjelpere */
+    /* Helpers */
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
 
-    /* Mobilmeny */
+    /* Mobile menu */
     const menuBtn = $('#menuBtn');
     const menuList = $('#menuList');
     const navBackdrop = $('#navBackdrop');
@@ -393,17 +375,13 @@
       menuBtn.addEventListener('click', () => {
         menuList.classList.contains('open') ? closeMenu() : openMenu();
       });
-      // Lukk ved klikk på lenke
       [...menuList.querySelectorAll('a')].forEach(a => a.addEventListener('click', closeMenu));
-      // Lukk ved klikk utenfor
       navBackdrop?.addEventListener('click', closeMenu);
-      // Lukk med ESC
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
-      // Sikre riktig state ved resize
       window.addEventListener('resize', () => { if(window.innerWidth > 900) closeMenu(); }, {passive:true});
     }
 
-    /* Aktiv lenke ved scroll */
+    /* Active link on scroll */
     const links = $$('.navlink');
     const sections = links.map(l => $(l.getAttribute('href'))).filter(Boolean);
     const obs = new IntersectionObserver(entries => {
@@ -432,7 +410,7 @@
     lb?.addEventListener('click', ()=>{ lb.style.display='none'; lbImg.src=''; });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lb.style.display='none'; });
 
-    /* Footer-år */
+    /* Footer year */
     $('#year').textContent = new Date().getFullYear();
 
     /* Events */
@@ -455,7 +433,7 @@
       const dt = (d)=> d.toISOString().slice(0,19).replace(/[-:]/g,'') + 'Z';
       const ics = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//UIO Quant Society//NO
+PRODID:-//UIO Quant Society//EN
 BEGIN:VEVENT
 UID:${crypto.randomUUID()}
 DTSTAMP:${dt(new Date())}
@@ -472,7 +450,7 @@ END:VCALENDAR`;
     async function renderEvents(){
       const wrap = document.getElementById('eventsWrap');
       const events = (await fetchPublicEvents()).sort((a,b)=> toDate(a) - toDate(b));
-      if(!events.length){ wrap.innerHTML = '<p class="event-empty">Ingen events publisert enda.</p>'; return; }
+      if(!events.length){ wrap.innerHTML = '<p class="event-empty">No events published yet.</p>'; return; }
       const now = new Date();
       wrap.innerHTML = events.map(e => {
         const d = toDate(e);
@@ -482,38 +460,35 @@ END:VCALENDAR`;
           <article class="card event-card ${past ? 'past' : ''}">
             <h3>${escapeHtml(e.title)}</h3>
             <div class="meta">
-              <span class="chip" title="Dato og tid">${iconClock()} ${dateStr}</span>
-              <span class="chip" title="Sted">${iconPin()} ${escapeHtml(e.place)}</span>
-              ${past ? '<span class="chip" title="Avsluttet">Ferdig</span>' : ''}
+              <span class="chip" title="Date and time">${iconClock()} ${dateStr}</span>
+              <span class="chip" title="Location">${iconPin()} ${escapeHtml(e.place)}</span>
+              ${past ? '<span class="chip" title="Completed">Finished</span>' : ''}
             </div>
             ${e.description ? `<p>${escapeHtml(e.description)}</p>` : ''}
             <div class="event-actions">
-              <a class="btn btn-primary" href="${makeICS(e)}" download="${slug(e.title)}.ics">Legg i kalender</a>
+              <a class="btn btn-primary" href="${makeICS(e)}" download="${slug(e.title)}.ics">Add to calendar</a>
             </div>
           </article>`;
       }).join('');
     }
     renderEvents();
 
-    /* Ikoner */
+    /* Icons */
     function iconClock(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>`; }
     function iconPin(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z"></path><circle cx="12" cy="11" r="3"></circle></svg>`; }
 
-    /* GitHub – repo-liste */
+    /* GitHub – repo list */
     async function renderRepos(){
       const list = document.getElementById('repoList');
       const orgBtn = document.getElementById('ghOrgBtn');
       if(!list) return;
 
-      // Sørg for at org-knapp peker på /orgs/URL
       if(orgBtn && GITHUB_ORG){
         orgBtn.href = `https://github.com/orgs/${encodeURIComponent(GITHUB_ORG)}`;
       }
 
-      // Manuelt definerte repos?
       let repos = Array.isArray(GITHUB_REPOS) ? GITHUB_REPOS.filter(r => r?.name) : [];
 
-      // Hvis ingen manuelle – hent fra GitHub API
       if(!repos.length && GITHUB_ORG){
         try{
           const res = await fetch(`https://api.github.com/orgs/${encodeURIComponent(GITHUB_ORG)}/repos?per_page=9&sort=updated`);
@@ -525,18 +500,18 @@ END:VCALENDAR`;
               html_url: r.html_url
             }));
           }
-        }catch{/* stille hvis offline */}
+        }catch{/* offline ok */}
       }
 
       if(!repos.length){
-        list.innerHTML = '<p class="muted">Repoer kommer fortløpende.</p>';
+        list.innerHTML = '<p class="muted">Repositories will appear here.</p>';
         return;
       }
 
       list.innerHTML = repos.map(r => `
         <a class="repo-card" href="${r.html_url || `https://github.com/${encodeURIComponent(GITHUB_ORG)}/${encodeURIComponent(r.name)}`}" target="_blank" rel="noopener">
           <h4>${escapeHtml(r.name)}</h4>
-          ${r.description ? `<p>${escapeHtml(r.description)}</p>` : '<p>Se kode og README på GitHub.</p>'}
+          ${r.description ? `<p>${escapeHtml(r.description)}</p>` : '<p>See code and README on GitHub.</p>'}
         </a>
       `).join('');
     }
